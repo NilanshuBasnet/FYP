@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/my_habits"
+            android:title="My Habits"
+            android:icon="@drawable/icon_myhabits"/>
+
+        <item
+            android:id="@+id/tutorial"
+            android:title="Help"
+            android:icon="@drawable/icon_help"/>
+
+        <item
+            android:id="@+id/about"
+            android:title="About"
+            android:icon="@drawable/icon_about"/>
+
+        <item
+            android:id="@+id/support"
+            android:title="Support"
+            android:icon="@drawable/icon_support"/>
+
+
+</menu>
