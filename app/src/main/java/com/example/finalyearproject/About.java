@@ -7,17 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SupportInfo extends AppCompatActivity {
+public class About extends AppCompatActivity {
 
     Button btnBack;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_support_info);
-        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_about);
 
-        btnBack = findViewById(R.id.btn_supportBack);
+
+
+        btnBack = findViewById(R.id.btn_back);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

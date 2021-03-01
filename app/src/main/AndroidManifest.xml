@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalyearproject">
-        <activity android:name=".SupportInfo"></activity>
+        <activity android:name=".Help"></activity>
+        <activity android:name=".About" />
+        <activity android:name=".SupportInfo" />
         <activity android:name=".AddHabit" />
         <activity android:name=".Dashboard" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

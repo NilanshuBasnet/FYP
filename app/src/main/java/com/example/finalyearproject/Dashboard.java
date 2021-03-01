@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
@@ -49,21 +51,23 @@ public class Dashboard extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item ) {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 switch (item.getItemId()){
 
                     case R.id.my_habits:
-                        Toast.makeText(Dashboard.this, " My Habits Clicked", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tutorial:
-                        Toast.makeText(Dashboard.this, " Tutorial Clicked", Toast.LENGTH_SHORT).show();
+                        Intent help = new Intent(Dashboard.this, Help.class); //Calling new Activity
+                        startActivity(help);
                         break;
                     case R.id.about:
-                        Toast.makeText(Dashboard.this, " About Clicked", Toast.LENGTH_SHORT).show();
+                        Intent about = new Intent(Dashboard.this, About.class); //Calling new Activity
+                        startActivity(about);
                         break;
                     case R.id.support:
                         Intent support = new Intent(Dashboard.this, SupportInfo.class); //Calling new Activity
