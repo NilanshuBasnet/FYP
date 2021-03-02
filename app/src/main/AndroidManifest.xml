@@ -9,11 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalyearproject">
-        <activity android:name=".Help"></activity>
-        <activity android:name=".About" />
-        <activity android:name=".SupportInfo" />
-        <activity android:name=".AddHabit" />
-        <activity android:name=".Dashboard" />
+        <activity android:name=".Help"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".About"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SupportInfo"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddHabit"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Dashboard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

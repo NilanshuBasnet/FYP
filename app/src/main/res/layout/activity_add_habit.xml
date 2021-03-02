@@ -41,12 +41,59 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.022" />
 
+        <Switch
+            android:id="@+id/switchSession"
+            android:layout_width="62dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/cambay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.84"
+            app:layout_constraintStart_toEndOf="@+id/textViewSession"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTimesaDay" />
+
+        <Switch
+            android:id="@+id/switchRemainder"
+            android:layout_width="62dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/cambay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.868"
+            app:layout_constraintStart_toEndOf="@+id/textViewRemainder"
+            app:layout_constraintTop_toBottomOf="@+id/switchSession" />
+
+        <Button
+            android:id="@+id/btnSaveHabit"
+            android:layout_width="286dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="7dp"
+            android:fontFamily="@font/cambay_bold"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRemainder" />
+
+        <TextView
+            android:id="@+id/textViewNotification"
+            android:layout_width="160dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/cambay"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRemainder" />
+
         <TextView
             android:id="@+id/textViewSession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/cambay"
             android:text="Session Tracking"
             android:textColor="@color/black"
@@ -58,8 +105,8 @@
             android:id="@+id/textViewRemainder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/cambay"
             android:text="Notification"
             android:textColor="@color/black"
@@ -71,8 +118,8 @@
             android:id="@+id/textViewTimesaDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/cambay"
             android:text="a day"
             android:textColor="@color/black"
@@ -84,7 +131,7 @@
             android:id="@+id/textViewGoal"
             android:layout_width="275dp"
             android:layout_height="31dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/cambay"
             android:text="Goal"
@@ -106,7 +153,7 @@
             android:textOff="Wed"
             android:textOn="Wed"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toggleButtonSun" />
 
@@ -114,7 +161,7 @@
             android:id="@+id/toggleButtonThu"
             android:layout_width="85dp"
             android:layout_height="30dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/toogle_button"
             android:fontFamily="sans-serif-medium"
@@ -129,7 +176,7 @@
             android:id="@+id/toggleButtonMon"
             android:layout_width="85dp"
             android:layout_height="30dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/toogle_button"
             android:fontFamily="sans-serif-medium"
@@ -144,7 +191,7 @@
             android:id="@+id/toggleButtonSat"
             android:layout_width="85dp"
             android:layout_height="30dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/toogle_button"
             android:fontFamily="sans-serif-medium"
@@ -159,7 +206,7 @@
             android:id="@+id/toggleButtonSun"
             android:layout_width="85dp"
             android:layout_height="30dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/toogle_button"
             android:fontFamily="sans-serif-medium"
@@ -201,41 +248,19 @@
             app:layout_constraintStart_toEndOf="@+id/toggleButtonThu"
             app:layout_constraintTop_toBottomOf="@+id/toggleButtonTue" />
 
-        <Switch
-            android:id="@+id/switchSession"
-            android:layout_width="62dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="36dp"
-            android:fontFamily="@font/cambay"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.84"
-            app:layout_constraintStart_toEndOf="@+id/textViewSession"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTimesaDay" />
-
-        <Switch
-            android:id="@+id/switchRemainder"
-            android:layout_width="62dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/cambay"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.868"
-            app:layout_constraintStart_toEndOf="@+id/textViewRemainder"
-            app:layout_constraintTop_toBottomOf="@+id/switchSession" />
-
         <EditText
             android:id="@+id/userInputGoal"
             android:layout_width="53dp"
             android:layout_height="55dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="28dp"
             android:backgroundTint="#e2e2e2"
             android:ems="10"
             android:fontFamily="@font/cambay"
             android:inputType="number"
-            android:text="1"
             android:maxLength="2"
+            android:text="1"
             android:textAlignment="center"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewGoal" />
@@ -244,7 +269,7 @@
             android:id="@+id/textViewFrequency"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/cambay"
             android:text="Frequency"
@@ -257,7 +282,7 @@
             android:id="@+id/textViewName"
             android:layout_width="373dp"
             android:layout_height="31dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="28dp"
             android:fontFamily="@font/cambay"
             android:text="Name"
@@ -270,13 +295,13 @@
             android:id="@+id/UserInputHabitName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="28dp"
             android:backgroundTint="#e2e2e2"
             android:ems="10"
             android:fontFamily="@font/cambay"
             android:hint="Daily Meditation"
             android:inputType="textPersonName"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewName" />
@@ -285,7 +310,7 @@
             android:id="@+id/userInputCount"
             android:layout_width="101dp"
             android:layout_height="55dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="28dp"
             android:backgroundTint="#e2e2e2"
             android:ems="10"
             android:fontFamily="@font/cambay"
@@ -293,22 +318,10 @@
             android:maxLength="10"
             android:text="Times"
             android:textAlignment="center"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/userInputGoal"
             app:layout_constraintTop_toBottomOf="@+id/textViewGoal" />
-
-        <Button
-            android:id="@+id/btnSaveHabit"
-            android:layout_width="286dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="7dp"
-            android:fontFamily="@font/cambay_bold"
-            android:text="Save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRemainder" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

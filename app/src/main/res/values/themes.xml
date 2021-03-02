@@ -18,4 +18,10 @@
         parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/cambay_bold</item>
     </style>
+
+    <style name="MyTimePickerDialogTheme" parent="@style/Theme.AppCompat.DayNight.Dialog">
+        <item name="android:textColor">@color/project_green</item>
+        <item name="colorAccent">@color/project_green</item>
+    </style>
+
 </resources>
