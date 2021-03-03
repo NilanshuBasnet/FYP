@@ -94,7 +94,7 @@ public class AddHabit extends AppCompatActivity {
                             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             c.set(Calendar.MINUTE, minute);
                             c.setTimeZone(TimeZone.getDefault());
-                            SimpleDateFormat format = new SimpleDateFormat("k:mm"); //k-Hour in day (1-24) m-Minute in hour a-Am/pm marker
+                            SimpleDateFormat format = new SimpleDateFormat("k:mm a"); //k-Hour in day (1-24) m-Minute in hour a-Am/pm marker
                             time = format.format(c.getTime());
                             txtNotify.setText("Set for " + time);
                         }
@@ -126,7 +126,7 @@ public class AddHabit extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                goToMain();
             }
         });
 
@@ -170,7 +170,6 @@ public class AddHabit extends AppCompatActivity {
 
                 } else {
                     storeData();
-                    onBackPressed();
                     goToMain();
                     Toast.makeText(getApplicationContext(),  "Habit Added ", Toast.LENGTH_SHORT).show();
                 }
@@ -182,6 +181,7 @@ public class AddHabit extends AppCompatActivity {
     private void goToMain() {
         Intent i = new Intent(this,Dashboard.class);
         startActivity(i);
+        finish();
     }
 
     public void storeData(){

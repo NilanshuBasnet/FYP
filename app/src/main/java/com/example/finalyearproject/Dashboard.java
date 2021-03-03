@@ -101,6 +101,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent addnew = new Intent(Dashboard.this, AddHabit.class); //Calling new Activity
                 startActivity(addnew);
+                finish();
             }
         });
     }

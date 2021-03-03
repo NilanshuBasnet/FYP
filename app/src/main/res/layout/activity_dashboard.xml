@@ -5,8 +5,9 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dashboard"
-    android:background="#f6f6f6">
+    android:layout_marginBottom="10dp"
+    android:background="#f6f6f6"
+    tools:context=".Dashboard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -21,15 +22,14 @@
             android:background="@color/project_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/custom_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cambay_bold"
                 android:layout_marginTop="13dp"
+                android:fontFamily="@font/cambay_bold"
                 android:text="Dashboard"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -37,11 +37,20 @@
         </androidx.appcompat.widget.Toolbar>
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listOfHabits"
+            android:layout_width="0dp"
+            android:layout_height="670dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_addnew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/add_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,26 +58,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/white" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listOfHabits"
-            android:layout_width="413dp"
-            android:layout_height="675dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/nav_header"
-        android:id="@+id/nav_view"
-        app:menu="@menu/nav_drawer_menu"
         android:layout_gravity="start"
-        app:itemTextAppearance="@style/bottom_navigation_textappreance">
+        app:headerLayout="@layout/nav_header"
+        app:itemTextAppearance="@style/bottom_navigation_textappreance"
+        app:menu="@menu/nav_drawer_menu">
 
         <TextView
             android:layout_width="wrap_content"
