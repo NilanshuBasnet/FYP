@@ -2,9 +2,13 @@ package com.example.finalyearproject;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HabitDatabase extends SQLiteOpenHelper {
 
@@ -66,7 +70,44 @@ public class HabitDatabase extends SQLiteOpenHelper {
         long ID = db.insert(DATABASE_TABLE, null, c);
         //Log.d("Inserted", "ID ---> " + ID);
         return ID;
+    }
 
+    public Habits getHabit(long id){
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DATABASE_TABLE, new String[]{KEY_ID,KEY_NAME,KEY_COUNT,KEY_COUNTNAME,KEY_SESSION,KEY_TIME}, KEY_ID+"=?",
+                new String[]{String.valueOf(id)}, null,null,null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return new Habits(cursor.getLong(0),
+                cursor.getString(1), cursor.getString(2),
+                cursor.getString(3), cursor.getString(4),
+                cursor.getString(5));
+    }
+
+    public List<Habits> getHabits(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Habits> allHabits = new ArrayList<>();
+        //Select * from database
+        String query = "SELECT * FROM "+ DATABASE_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do {
+                Habits habits = new Habits();
+                habits.setID(cursor.getLong(0));
+                habits.setName(cursor.getString(1));
+                habits.setCount(cursor.getString(2));
+                habits.setCountName(cursor.getString(3));
+                habits.setSessionTracking(cursor.getString(4));
+                habits.setTime(cursor.getString(5));
+
+                allHabits.add(habits);
+
+            }while(cursor.moveToNext());
+        }
+        return allHabits;
     }
 }
+

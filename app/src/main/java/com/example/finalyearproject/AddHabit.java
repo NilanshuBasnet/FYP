@@ -7,6 +7,7 @@ import android.app.AlarmManager;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -39,13 +40,17 @@ public class AddHabit extends AppCompatActivity {
     Boolean sessionTracking = false;
     Switch Notify;
     int Nhour,Nminute;
-    String time, shabitName, sgoalCount, scountName, newTime;
-    String sessions = "0";
+    String shabitName, sgoalCount, scountName, newTime;
+    String sessions = "Off";
+    String time = "Not Set";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
+
+
+
 
         //Shows Notification time set by user
         txtNotify = findViewById(R.id.textViewNotification);
@@ -60,11 +65,11 @@ public class AddHabit extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     sessionTracking = true;
-                    sessions = "1";
+                    sessions = "On";
 
                 }else {
                     sessionTracking = false;
-                    sessions = "0";
+                    sessions = "Off";
                     Toast.makeText(getApplicationContext(),  "Session Tracking Turned Off ", Toast.LENGTH_SHORT).show();
                 }
 
@@ -89,7 +94,7 @@ public class AddHabit extends AppCompatActivity {
                             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             c.set(Calendar.MINUTE, minute);
                             c.setTimeZone(TimeZone.getDefault());
-                            SimpleDateFormat format = new SimpleDateFormat("k:mm a"); //k-Hour in day (1-24) m-Minute in hour a-Am/pm marker
+                            SimpleDateFormat format = new SimpleDateFormat("k:mm"); //k-Hour in day (1-24) m-Minute in hour a-Am/pm marker
                             time = format.format(c.getTime());
                             txtNotify.setText("Set for " + time);
                         }
@@ -166,6 +171,7 @@ public class AddHabit extends AppCompatActivity {
                 } else {
                     storeData();
                     onBackPressed();
+                    goToMain();
                     Toast.makeText(getApplicationContext(),  "Habit Added ", Toast.LENGTH_SHORT).show();
                 }
 
@@ -173,10 +179,16 @@ public class AddHabit extends AppCompatActivity {
         });
     }
 
+    private void goToMain() {
+        Intent i = new Intent(this,Dashboard.class);
+        startActivity(i);
+    }
+
     public void storeData(){
         Habits habits = new Habits(shabitName,sgoalCount,scountName,sessions,newTime);
         HabitDatabase db = new HabitDatabase(this);
         db.addHabit(habits);
     }
+
 
 }

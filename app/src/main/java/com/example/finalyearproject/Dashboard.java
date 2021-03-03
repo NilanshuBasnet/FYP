@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+
 public class Dashboard extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -26,6 +29,8 @@ public class Dashboard extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
     RecyclerView recyclerView;
+    Adapter adapter;
+    List<Habits> habits;
 
     FloatingActionButton btnAddNew;
 
@@ -34,7 +39,14 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+
+        HabitDatabase db = new HabitDatabase(this);
+        habits = db.getHabits();
         recyclerView = findViewById(R.id.listOfHabits);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Adapter(this,habits );
+        recyclerView.setAdapter(adapter);
+
 
 
         drawerLayout = findViewById(R.id.drawerLayout);
