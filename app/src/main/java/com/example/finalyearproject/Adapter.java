@@ -1,12 +1,14 @@
 package com.example.finalyearproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -57,6 +59,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewCounter = itemView.findViewById(R.id.textViewCounter);
             textViewSessionTracking = itemView.findViewById(R.id.textViewSessionTracking);
+
+            //Handeling click on items
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), habit_details.class);
+                    i.putExtra("ID", habits.get(getAdapterPosition()).getID());//to get data from database to new activity
+                    v.getContext().startActivity(i);
+                }
+            });
         }
     }
 }

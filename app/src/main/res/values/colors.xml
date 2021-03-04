@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#bbbbbb</color>
     <color name="tooglegrey">#e2e2e2</color>
-    <color name="project_green">#4FEF9F</color>
+    <color name="project_green">#42D8B5</color>
+    <color name="pink">#ED7BDF</color>
+    <color name="purple">#ADAED3</color>
+
+
 </resources>

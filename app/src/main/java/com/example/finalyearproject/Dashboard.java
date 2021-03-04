@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +33,8 @@ public class Dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     Adapter adapter;
     List<Habits> habits;
+    ImageView errorImg;
+    TextView noData;
 
     FloatingActionButton btnAddNew;
 
@@ -47,6 +51,9 @@ public class Dashboard extends AppCompatActivity {
         adapter = new Adapter(this,habits );
         recyclerView.setAdapter(adapter);
 
+        errorImg = findViewById(R.id.imageViewError);
+        noData = findViewById(R.id.textViewNoData);
+
 
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -59,6 +66,13 @@ public class Dashboard extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+
+
+        //Empty Dashboard
+        if (adapter.getItemCount() != 0){
+            errorImg.setVisibility(View.INVISIBLE);
+            noData.setVisibility(View.INVISIBLE);
+        }
 
 
 

@@ -45,17 +45,20 @@ public class AddHabit extends AppCompatActivity {
     String time = "Not Set";
 
     @Override
+    public void onBackPressed()
+    {
+        goToMain();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
 
 
 
-
         //Shows Notification time set by user
         txtNotify = findViewById(R.id.textViewNotification);
-
-
 
 
         //Session Tracking Switch
