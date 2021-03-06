@@ -41,28 +41,38 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="254dp"
+                android:layout_height="49dp"
+                android:layout_marginBottom="10dp"
+                android:text="Delete Habit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.554"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calendarView"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
                 android:id="@+id/btnStartSession"
                 android:layout_width="254dp"
                 android:layout_height="49dp"
-                android:layout_marginBottom="32dp"
-                android:text="Start Session Tracking"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="40dp"
+                android:text="Session Tracking"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendarView2"
-                app:layout_constraintVertical_bias="0.484" />
+                app:layout_constraintTop_toBottomOf="@+id/btnCounterIDecrease" />
 
             <TextView
                 android:id="@+id/textViews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/cambay"
-                android:text="Longest streak"
+                android:text="Success rate"
                 android:textColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.802"
+                app:layout_constraintHorizontal_bias="0.82"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
                 app:layout_constraintTop_toBottomOf="@+id/textViewStreak" />
 
@@ -72,34 +82,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="68dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/cambay_bold"
                 android:text="0"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTitle" />
-
-            <TextView
-                android:id="@+id/textViewCompletionRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="16dp"
-                android:text="60%"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
                 android:id="@+id/textViewStreak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="236dp"
                 android:layout_marginTop="8dp"
-                android:text="0"
+                android:layout_marginEnd="36dp"
+                android:fontFamily="@font/cambay_bold"
+                android:text="100%"
                 android:textColor="@color/black"
-                android:textSize="30sp"
-                app:layout_constraintStart_toEndOf="@+id/textViewCheckins"
+                android:textSize="36sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTitle" />
 
             <TextView
@@ -107,7 +107,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/cambay"
                 android:text="Total check-ins"
                 android:textColor="@color/grey"
@@ -119,7 +118,7 @@
                 android:layout_width="350dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/project_green"
+                android:background="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
@@ -129,33 +128,50 @@
                 android:id="@+id/view3"
                 android:layout_width="350dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="136dp"
-                android:background="@color/project_green"
+                android:layout_marginTop="12dp"
+                android:background="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.368"
+                app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCompletionRate" />
+                app:layout_constraintTop_toBottomOf="@+id/btnStartSession" />
 
             <ImageView
                 android:id="@+id/imageView9"
-                android:layout_width="69dp"
-                android:layout_height="76dp"
-                android:layout_marginBottom="15dp"
+                android:layout_width="85dp"
+                android:layout_height="105dp"
+                android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/view"
-                app:layout_constraintEnd_toStartOf="@+id/textViewStreak"
-                app:layout_constraintStart_toEndOf="@+id/textViewCheckins"
+                app:layout_constraintEnd_toStartOf="@+id/textViews"
+                app:layout_constraintStart_toEndOf="@+id/textView16"
                 app:srcCompat="@drawable/motivate" />
+
+            <TextView
+                android:id="@+id/textViewCompletionRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/cambay_bold"
+                android:text="60%"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="@+id/progressBar2"
+                app:layout_constraintTop_toTopOf="@+id/progressBar2" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="270dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="133dp"
+                android:layout_height="143dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="52dp"
+                android:background="@drawable/circular_shape"
+                android:indeterminate="false"
+                android:max="100"
                 android:progress="60"
-                app:layout_constraintStart_toEndOf="@+id/textViewCompletionRate"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                android:progressDrawable="@drawable/progress_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -164,18 +180,81 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/cambay"
-                android:text="Completion Rate"
+                android:text="Status"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <CalendarView
-                android:id="@+id/calendarView2"
-                android:layout_width="434dp"
-                android:layout_height="347dp"
+            <TextView
+                android:id="@+id/textViewCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="84dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/cambay_bold"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                app:layout_constraintStart_toEndOf="@+id/progressBar2"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <Button
+                android:id="@+id/btnCounterIDecrease"
+                android:layout_width="26dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="76dp"
+                android:background="@drawable/ic_decrease"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.473"
+                app:layout_constraintHorizontal_bias="0.057"
+                app:layout_constraintStart_toEndOf="@+id/btnCounterIncrease"
+                app:layout_constraintTop_toTopOf="@+id/textViewCount" />
+
+            <Button
+                android:id="@+id/btnCounterIncrease"
+                android:layout_width="26dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="244dp"
+                android:layout_marginTop="76dp"
+                android:background="@drawable/ic_add_counter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewCount" />
+
+            <TextView
+                android:id="@+id/textViewCountName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/cambay"
+                android:maxLength="13"
+                android:text="count"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewCount"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:fontFamily="@font/cambay"
+                android:text="Completed"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
+                app:layout_constraintEnd_toEndOf="@+id/progressBar2"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="@+id/progressBar2" />
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="0dp"
+                android:layout_height="325dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view3" />
 

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dashboard extends AppCompatActivity {
@@ -31,8 +33,10 @@ public class Dashboard extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
     RecyclerView recyclerView;
-    Adapter adapter;
-    List<Habits> habits;
+
+    CustomAdapter customAdapter;
+    ArrayList<String> habitTitle, goalCount, trackSession;
+    DatabaseHelper myDb;
     ImageView errorImg;
     TextView noData;
 
@@ -43,13 +47,18 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        myDb =new DatabaseHelper(Dashboard.this);
+        habitTitle = new ArrayList<>();
+        goalCount = new ArrayList<>();
+        trackSession = new ArrayList<>();
+        storeDataInArrays();
 
-        HabitDatabase db = new HabitDatabase(this);
-        habits = db.getHabits();
+
+
         recyclerView = findViewById(R.id.listOfHabits);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Adapter(this,habits );
-        recyclerView.setAdapter(adapter);
+        customAdapter = new CustomAdapter(Dashboard.this, habitTitle, goalCount,trackSession);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Dashboard.this));
 
         errorImg = findViewById(R.id.imageViewError);
         noData = findViewById(R.id.textViewNoData);
@@ -69,7 +78,7 @@ public class Dashboard extends AppCompatActivity {
 
 
         //Empty Dashboard
-        if (adapter.getItemCount() != 0){
+        if (customAdapter.getItemCount() > 0){
             errorImg.setVisibility(View.INVISIBLE);
             noData.setVisibility(View.INVISIBLE);
         }
@@ -127,6 +136,20 @@ public class Dashboard extends AppCompatActivity {
         }
         else{
             super.onBackPressed();
+        }
+    }
+
+
+    void storeDataInArrays(){
+        Cursor cursor = myDb.getHabitData();
+        if(cursor.getCount() == 0){
+            Toast.makeText(this,"No Data",Toast.LENGTH_SHORT).show();
+        }else {
+            while (cursor.moveToNext()){
+                habitTitle.add(cursor.getString(0));
+                goalCount.add(cursor.getString(1));
+                trackSession.add(cursor.getString(3));
+            }
         }
     }
 

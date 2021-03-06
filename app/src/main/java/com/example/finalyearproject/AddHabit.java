@@ -43,6 +43,7 @@ public class AddHabit extends AppCompatActivity {
     String shabitName, sgoalCount, scountName, newTime;
     String sessions = "Off";
     String time = "Not Set";
+    DatabaseHelper dbase;
 
     @Override
     public void onBackPressed()
@@ -54,6 +55,8 @@ public class AddHabit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
+
+        dbase = new DatabaseHelper(this);
 
 
 
@@ -73,6 +76,7 @@ public class AddHabit extends AppCompatActivity {
                 }else {
                     sessionTracking = false;
                     sessions = "Off";
+
                     Toast.makeText(getApplicationContext(),  "Session Tracking Turned Off ", Toast.LENGTH_SHORT).show();
                 }
 
@@ -117,7 +121,9 @@ public class AddHabit extends AppCompatActivity {
                 }else {
                     //When Unchecked
                     txtNotify.setText("");
+
                     Toast.makeText(getApplicationContext(),  "Notification Turned OFF ", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -172,7 +178,7 @@ public class AddHabit extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),  "Please fill all the required fields! ", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    storeData();
+                    Boolean insertData = dbase.insertHabitData(shabitName,sgoalCount,scountName,sessions,newTime);
                     goToMain();
                     Toast.makeText(getApplicationContext(),  "Habit Added ", Toast.LENGTH_SHORT).show();
                 }
@@ -187,11 +193,7 @@ public class AddHabit extends AppCompatActivity {
         finish();
     }
 
-    public void storeData(){
-        Habits habits = new Habits(shabitName,sgoalCount,scountName,sessions,newTime);
-        HabitDatabase db = new HabitDatabase(this);
-        db.addHabit(habits);
-    }
+
 
 
 }
