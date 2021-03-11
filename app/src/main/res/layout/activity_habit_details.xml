@@ -28,7 +28,7 @@
                 app:layout_constraintVertical_bias="0.022" />
 
             <TextView
-                android:id="@+id/textTitle"
+                android:id="@+id/txtSessionTrack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -62,19 +62,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnCounterIDecrease" />
-
-            <TextView
-                android:id="@+id/textViews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cambay"
-                android:text="Success rate"
-                android:textColor="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.82"
-                app:layout_constraintStart_toEndOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textViewStreak" />
+                app:layout_constraintTop_toBottomOf="@+id/btnCounterDecrease" />
 
             <TextView
                 android:id="@+id/textViewCheckins"
@@ -87,20 +75,7 @@
                 android:textColor="@color/black"
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textTitle" />
-
-            <TextView
-                android:id="@+id/textViewStreak"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="36dp"
-                android:fontFamily="@font/cambay_bold"
-                android:text="100%"
-                android:textColor="@color/black"
-                android:textSize="36sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSessionTrack" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -128,7 +103,7 @@
                 android:id="@+id/view3"
                 android:layout_width="350dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="25dp"
                 android:background="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
@@ -139,9 +114,9 @@
                 android:id="@+id/imageView9"
                 android:layout_width="85dp"
                 android:layout_height="105dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/view"
-                app:layout_constraintEnd_toStartOf="@+id/textViews"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
                 app:srcCompat="@drawable/motivate" />
 
@@ -149,13 +124,13 @@
                 android:id="@+id/textViewCompletionRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:layout_marginEnd="40dp"
                 android:fontFamily="@font/cambay_bold"
                 android:text="60%"
                 android:textColor="@color/black"
                 android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
                 app:layout_constraintEnd_toEndOf="@+id/progressBar2"
+                app:layout_constraintStart_toStartOf="@+id/progressBar2"
                 app:layout_constraintTop_toTopOf="@+id/progressBar2" />
 
             <ProgressBar
@@ -200,7 +175,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <Button
-                android:id="@+id/btnCounterIDecrease"
+                android:id="@+id/btnCounterDecrease"
                 android:layout_width="26dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="28dp"
@@ -257,6 +232,41 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="18dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:tint="#FF5722"
+                app:layout_constraintEnd_toStartOf="@+id/txtSessionStat"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:srcCompat="@drawable/session_image" />
+
+            <TextView
+                android:id="@+id/txtSessionStat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="36dp"
+                android:fontFamily="@font/cambay_bold"
+                android:text="OFF"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="88dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="60dp"
+                android:text="SAVE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.526"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

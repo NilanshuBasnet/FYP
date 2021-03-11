@@ -37,11 +37,10 @@ public class AddHabit extends AppCompatActivity {
     Button btnBack, btnSaveHabit;
     ToggleButton btnSun, btnMon, btnTue, btnWed, btnThu, btnFri, btnSat;
     Switch session;
-    Boolean sessionTracking = false;
     Switch Notify;
     int Nhour,Nminute;
     String shabitName, sgoalCount, scountName, newTime;
-    String sessions = "Off";
+    String sessions = "0";
     String time = "Not Set";
     DatabaseHelper dbase;
 
@@ -70,12 +69,10 @@ public class AddHabit extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    sessionTracking = true;
-                    sessions = "On";
+                    sessions = "1";
 
-                }else {
-                    sessionTracking = false;
-                    sessions = "Off";
+                }else{
+                    sessions = "0";
 
                     Toast.makeText(getApplicationContext(),  "Session Tracking Turned Off ", Toast.LENGTH_SHORT).show();
                 }

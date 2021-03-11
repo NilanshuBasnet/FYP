@@ -16,13 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList habitTitle, goalCount, trackSession;
+    private ArrayList id, habitTitle, goalCount, countName, trackSession;
 
-    CustomAdapter(Context context, ArrayList habitTitle, ArrayList goalCount,
+    CustomAdapter(Context context, ArrayList id, ArrayList habitTitle, ArrayList goalCount, ArrayList countName,
                    ArrayList trackSession){
         this.context = context;
+        this.id = id;
         this.habitTitle = habitTitle;
         this.goalCount = goalCount;
+        this.countName = countName;
         this.trackSession = trackSession;
     }
 
@@ -38,17 +40,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.habitTitleTxt.setText(String.valueOf(habitTitle.get(position)));
-        holder.goalCountTxt.setText(String.valueOf(goalCount.get(position)));
-        holder.trackSessionTxt.setText(String.valueOf(trackSession.get(position)));
+        holder.goalCountTxt.setText("0/"+String.valueOf(goalCount.get(position)));
+        String temp;
+        if(Integer.parseInt(String.valueOf(trackSession.get(position))) == 0){
+            temp = "Off";
+        }else{
+            temp = "On";
+        }
+        holder.trackSessionTxt.setText(temp);
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent i = new Intent(context, habit_details.class);
+                i.putExtra("id", String.valueOf(id.get(position)));
                 i.putExtra("title", String.valueOf(habitTitle.get(position)));
+                i.putExtra("countName", String.valueOf(countName.get(position)));
                 i.putExtra("totalCount", String.valueOf(goalCount.get(position)));
                 i.putExtra("trackingStatus", String.valueOf(trackSession.get(position)));
                 context.startActivity(i);
+                ((Dashboard)context).finish();
             }
         });
 

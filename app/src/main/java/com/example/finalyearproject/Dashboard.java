@@ -35,7 +35,7 @@ public class Dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
 
     CustomAdapter customAdapter;
-    ArrayList<String> habitTitle, goalCount, trackSession;
+    ArrayList<String> id,habitTitle, goalCount,countName, trackSession;
     DatabaseHelper myDb;
     ImageView errorImg;
     TextView noData;
@@ -48,15 +48,18 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         myDb =new DatabaseHelper(Dashboard.this);
+        id = new ArrayList<>();
         habitTitle = new ArrayList<>();
         goalCount = new ArrayList<>();
+        countName = new ArrayList<>();
         trackSession = new ArrayList<>();
+
         storeDataInArrays();
 
 
 
         recyclerView = findViewById(R.id.listOfHabits);
-        customAdapter = new CustomAdapter(Dashboard.this, habitTitle, goalCount,trackSession);
+        customAdapter = new CustomAdapter(Dashboard.this,id, habitTitle, goalCount,countName,trackSession);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(Dashboard.this));
 
@@ -146,9 +149,11 @@ public class Dashboard extends AppCompatActivity {
             Toast.makeText(this,"No Data",Toast.LENGTH_SHORT).show();
         }else {
             while (cursor.moveToNext()){
-                habitTitle.add(cursor.getString(0));
-                goalCount.add(cursor.getString(1));
-                trackSession.add(cursor.getString(3));
+                id.add(cursor.getString(0));
+                habitTitle.add(cursor.getString(1));
+                goalCount.add(cursor.getString(2));
+                countName.add(cursor.getString(3));
+                trackSession.add(cursor.getString(4));
             }
         }
     }

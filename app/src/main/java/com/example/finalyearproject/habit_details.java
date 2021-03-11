@@ -3,22 +3,30 @@ package com.example.finalyearproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 public class habit_details extends AppCompatActivity {
 
     Button btnBack;
-    TextView titleText;
-    String title, totalCount, trackingStatus;
+    TextView titleText, countCounter, completionRate, counterName, sessionStat;
+    String id,title, totalCount,countName, trackingStatus, habitId,habitStat;
+    String stat = "OFF";
+    ProgressBar completionTracker;
+    Button btnIncrease, btnDecrease, btnDelete, btnSessionTracking, btnSave;
+    DatabaseHelper db;
 
 
+    @Override
+    public void onBackPressed()
+    {
+        goToMain();
+    }
 
 
     @Override
@@ -26,9 +34,27 @@ public class habit_details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_details);
 
-        titleText = findViewById(R.id.textTitle);
-        getIntentData();
 
+
+        habitId= getIntent().getStringExtra("id");
+        titleText = findViewById(R.id.txtSessionTrack);
+        countCounter = findViewById(R.id.textViewCount);
+        counterName = findViewById(R.id.textViewCountName);
+        completionRate = findViewById(R.id.textViewCompletionRate);
+        sessionStat = findViewById(R.id.txtSessionStat);
+        completionTracker = findViewById(R.id.progressBar2);
+        btnIncrease = findViewById(R.id.btnCounterIncrease);
+        btnDecrease = findViewById(R.id.btnCounterDecrease);
+        btnDelete = findViewById(R.id.btnDelete);
+        btnSessionTracking = findViewById(R.id.btnStartSession);
+        btnSave = findViewById(R.id.btnSave);
+
+        db = new DatabaseHelper(this);
+        Cursor cursor = db.getHabitData();
+
+
+        getIntentData();
+        counterData();
 
 
 
@@ -42,20 +68,141 @@ public class habit_details extends AppCompatActivity {
             }
         });
 
+        //Save
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //Counter Increase
+        btnIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String c = countCounter.getText().toString();
+                int ct = Integer.parseInt(c);
+                int totCoun = Integer.parseInt(totalCount);
+                String c1;
+
+                if(ct < totCoun){
+                    ct = ct +1;
+                    countCounter.setText(String.valueOf(ct));
+                    counterData();;
+                }
+                else{
+                    Toast.makeText(habit_details.this, "Target Completed", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+        //Counter Decrease
+        btnDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String c = countCounter.getText().toString();
+                int ct = Integer.parseInt(c);
+                int totCoun = Integer.parseInt(totalCount);
+
+                if(ct > 0){
+                    ct = ct - 1;
+                    countCounter.setText(String.valueOf(ct));
+                    counterData();
+                }
+                else{
+                    Toast.makeText(habit_details.this, "Cannot decrease more!", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+        //Delete Data from database
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String idTXT = habitId;
+                Boolean checkDeletedata = db.deleteHabitData(habitId);
+                goToMain();
+                if(checkDeletedata==true)
+                    Toast.makeText(habit_details.this, "Habit Deleted", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(habit_details.this, "Habit Not Deleted", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        //Session Tracking
+        btnSessionTracking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent session = new Intent(habit_details.this, session_tracking.class); //Calling new Activity
+                startActivity(session);
+            }
+        });
+
+
     }
 
-    void getIntentData(){
-        if(getIntent().hasExtra("title") && getIntent().hasExtra("totalCount")  && getIntent().hasExtra("trackingStatus")){
+    public void getIntentData(){
+        if(getIntent().hasExtra("id") && getIntent().hasExtra("title") && getIntent().hasExtra("totalCount")  && getIntent().hasExtra("trackingStatus") && getIntent().hasExtra("countName")){
 
 
+            id = getIntent().getStringExtra("id");
             title = getIntent().getStringExtra("title");
             totalCount = getIntent().getStringExtra("totalCount");
             trackingStatus = getIntent().getStringExtra("trackingStatus");
+            countName = getIntent().getStringExtra("countName");
 
             titleText.setText(title);
+            counterName.setText(countName);
+
 
         }else{
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void counterData(){
+        String counter = countCounter.getText().toString();
+        int totalCountInt = Integer.parseInt(totalCount);
+        int doneCountInt = Integer.parseInt(counter);
+        float percentage = ((float)doneCountInt / (float)totalCountInt) * 100;
+        String percentageStr = ((int) percentage) + "%";
+
+        completionRate.setText(percentageStr);
+        completionTracker.setProgress((int) percentage);
+
+        if(Integer.parseInt(trackingStatus) == 0){
+            String temp = "Off";
+            sessionStat.setText(temp);
+            btnSessionTracking.setVisibility(View.GONE);
+        }else{
+            String temp = "On";
+            sessionStat.setText(temp);
+        }
+
+
+        if(totalCountInt == doneCountInt){
+            habitStat = "Completed";
+        }
+
+
+
+
+
+
+    }
+
+    private void goToMain() {
+        Intent m = new Intent(this,Dashboard.class);
+        m.putExtra("habitStat", habitStat);
+        startActivity(m);
+        finish();
+    }
+
 }

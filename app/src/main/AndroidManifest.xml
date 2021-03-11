@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalyearproject">
-        <activity android:name=".habit_details" />
+        <activity
+            android:name=".session_tracking"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".habit_details"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Help"
             android:screenOrientation="portrait" />
@@ -25,6 +30,7 @@
         <activity
             android:name=".Dashboard"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

@@ -9,9 +9,13 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String TABLE_NAME = "habits_table";
+
+    private static final String DATABASE_NAME = "Habit Data";
+    private static final String TABLE_NAME = "Habits";
+    private static final String TABLE2= "Habit_details";
 
     //Columns for database table
+    private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_COUNT = "count";
     private static final String KEY_COUNTNAME = "countName";
@@ -19,14 +23,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_TIME = "time";
 
 
+    //Table2 Columns
+    private static final String KEY_CHECKIN = "checkin";
+    private static final String KEY_DONECOUNT = "doneCount";
+    private static final String KEY_HabitId = "habitid";
+
+
+
     public DatabaseHelper(Context context){
-        super(context,TABLE_NAME,null,1);
+        super(context,DATABASE_NAME,null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createTable = "CREATE TABLE " + TABLE_NAME + "("+ KEY_NAME +" TEXT PRIMARY KEY," +
+
+        String createTable = "CREATE TABLE " + TABLE_NAME + "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                KEY_NAME +" TEXT," +
                 KEY_COUNT + " TEXT," +
                 KEY_COUNTNAME + " TEXT," +
                 KEY_SESSION + " TEXT," +
@@ -68,12 +81,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean deleteHabitData (String KEY_NAME){
+    public boolean deleteHabitData (String KEY_ID){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE name = ?", new String[]{KEY_NAME});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[]{KEY_ID});
         if (cursor.getCount() > 0) {
-            long result = db.delete(TABLE_NAME, "name=?", new String[]{KEY_NAME});
+            long result = db.delete(TABLE_NAME, "id=?", new String[]{KEY_ID});
 
             //if data is not inserted correctly it will return -1
             if (result == -1) {
@@ -90,13 +103,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getHabitData (){
 
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME+" ORDER BY "+KEY_ID+" DESC";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         if(db != null){
             cursor = db.rawQuery(query,null);
         }
         return cursor;
+    }
+
+    public void createTable2(SQLiteDatabase db){
+        String createTable2 = "CREATE TABLE " + TABLE2 + "(" +
+                KEY_HabitId + " TEXT," +
+                KEY_CHECKIN + " TEXT," +
+                KEY_DONECOUNT + " TEXT" +")";
+        db.execSQL(createTable2);
+
     }
 
 
