@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.telephony.mbms.StreamingServiceInfo;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -14,11 +15,12 @@ import android.widget.Toast;
 public class habit_details extends AppCompatActivity {
 
     Button btnBack;
-    TextView titleText, countCounter, completionRate, counterName, sessionStat;
+    TextView titleText, countCounter, completionRate, counterName, sessionStat, checkIns;
     String id,title, totalCount,countName, trackingStatus, habitId,habitStat;
-    String stat = "OFF";
+    String stat = "OFF", checkin, counter;
+    public String CounterCount;
     ProgressBar completionTracker;
-    Button btnIncrease, btnDecrease, btnDelete, btnSessionTracking, btnSave;
+    Button btnIncrease, btnDecrease, btnDelete, btnSessionTracking, btnSaveD;
     DatabaseHelper db;
 
 
@@ -36,24 +38,49 @@ public class habit_details extends AppCompatActivity {
 
 
 
+
+
+
         habitId= getIntent().getStringExtra("id");
         titleText = findViewById(R.id.txtSessionTrack);
         countCounter = findViewById(R.id.textViewCount);
         counterName = findViewById(R.id.textViewCountName);
         completionRate = findViewById(R.id.textViewCompletionRate);
+        checkIns = findViewById(R.id.textViewCheckins);
         sessionStat = findViewById(R.id.txtSessionStat);
         completionTracker = findViewById(R.id.progressBar2);
         btnIncrease = findViewById(R.id.btnCounterIncrease);
         btnDecrease = findViewById(R.id.btnCounterDecrease);
         btnDelete = findViewById(R.id.btnDelete);
         btnSessionTracking = findViewById(R.id.btnStartSession);
-        btnSave = findViewById(R.id.btnSave);
+        btnSaveD = findViewById(R.id.btnSaveDetails);
 
         db = new DatabaseHelper(this);
-        Cursor cursor = db.getHabitData();
+
 
 
         getIntentData();
+
+
+
+
+
+        CounterCount = countCounter.getText().toString();
+        checkin = checkIns.getText().toString();
+
+
+        //Save Details
+        btnSaveD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.deletePreviousData(id);
+                Boolean insertHabitDetail = db.insertHabitDetailData(Integer.valueOf(id),checkin,CounterCount);
+                onBackPressed();
+                Toast.makeText(habit_details.this, "Data Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        searchData();
         counterData();
 
 
@@ -68,13 +95,7 @@ public class habit_details extends AppCompatActivity {
             }
         });
 
-        //Save
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
         //Counter Increase
         btnIncrease.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +109,7 @@ public class habit_details extends AppCompatActivity {
                 if(ct < totCoun){
                     ct = ct +1;
                     countCounter.setText(String.valueOf(ct));
+                    CounterCount = String.valueOf(ct);
                     counterData();;
                 }
                 else{
@@ -109,6 +131,7 @@ public class habit_details extends AppCompatActivity {
                 if(ct > 0){
                     ct = ct - 1;
                     countCounter.setText(String.valueOf(ct));
+                    CounterCount = String.valueOf(ct);
                     counterData();
                 }
                 else{
@@ -146,6 +169,10 @@ public class habit_details extends AppCompatActivity {
         });
 
 
+
+
+
+
     }
 
     public void getIntentData(){
@@ -168,7 +195,7 @@ public class habit_details extends AppCompatActivity {
     }
 
     public void counterData(){
-        String counter = countCounter.getText().toString();
+        counter = countCounter.getText().toString();
         int totalCountInt = Integer.parseInt(totalCount);
         int doneCountInt = Integer.parseInt(counter);
         float percentage = ((float)doneCountInt / (float)totalCountInt) * 100;
@@ -203,6 +230,15 @@ public class habit_details extends AppCompatActivity {
         m.putExtra("habitStat", habitStat);
         startActivity(m);
         finish();
+    }
+
+    //Getting Data of table 2
+    public void searchData(){
+        Cursor result = db.getHabitDetail(habitId);
+        while (result.moveToNext()){
+            countCounter.setText(result.getString(3));
+        }
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.finalyearproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context context;
     private ArrayList id, habitTitle, goalCount, countName, trackSession;
 
+
+
     CustomAdapter(Context context, ArrayList id, ArrayList habitTitle, ArrayList goalCount, ArrayList countName,
                    ArrayList trackSession){
         this.context = context;
@@ -26,6 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.goalCount = goalCount;
         this.countName = countName;
         this.trackSession = trackSession;
+
     }
 
     @NonNull
@@ -34,13 +38,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.custom_list_view,parent,false);
         return new MyViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.habitTitleTxt.setText(String.valueOf(habitTitle.get(position)));
-        holder.goalCountTxt.setText("0/"+String.valueOf(goalCount.get(position)));
+        holder.goalCountTxt.setText(String.valueOf(goalCount.get(position)));
         String temp;
         if(Integer.parseInt(String.valueOf(trackSession.get(position))) == 0){
             temp = "Off";
@@ -82,4 +87,5 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         }
     }
+
 }

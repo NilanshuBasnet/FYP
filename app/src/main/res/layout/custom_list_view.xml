@@ -114,19 +114,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
                     app:layout_constraintVertical_bias="0.333" />
 
-                <TextView
-                    android:id="@+id/textViewStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/cambay_bold"
-                    android:text="PENDING"
-                    android:textAllCaps="true"
-                    android:textColor="#FF4E50"
-                    android:textSize="10sp"
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="15dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.488"
+                    app:srcCompat="@drawable/edit" />
 
                 <TextView
                     android:id="@+id/textViewTitle"

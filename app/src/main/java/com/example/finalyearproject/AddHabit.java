@@ -59,6 +59,7 @@ public class AddHabit extends AppCompatActivity {
 
 
 
+
         //Shows Notification time set by user
         txtNotify = findViewById(R.id.textViewNotification);
 
