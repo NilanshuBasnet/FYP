@@ -49,6 +49,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/btnreset"
+        android:backgroundTint="#FF5349"
         android:onClick="resetChronometer"
         app:layout_constraintStart_toEndOf="@+id/btnPause"
         app:layout_constraintTop_toBottomOf="@+id/chronometer" />

@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Habit Data";
     private static final String TABLE_NAME = "Habits";
     private static final String TABLE2= "Habit_details";
+    private static final String TABLE3 = "all_data";
 
     //Columns for database table
     private static final String KEY_ID = "id";
@@ -27,14 +28,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Table2 Columns
     private static final String KEY_NEWID = "mainid";
-    private static final String KEY_CHECKIN = "checkin";
+    private static final String KEY_SESSIONCOUNT = "sessionCount";
     private static final String KEY_DONECOUNT = "doneCount";
     private static final String KEY_DetailId = "detailid";
 
 
 
     public DatabaseHelper(Context context){
-        super(context,DATABASE_NAME,null,2);
+        super(context,DATABASE_NAME,null,4);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE2 + " (" +  KEY_DetailId +" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 KEY_NEWID +" INTEGER, "+
-                KEY_CHECKIN +" TEXT," +
+                KEY_SESSIONCOUNT +" TEXT," +
                 KEY_DONECOUNT + " TEXT" + ")"
         );
 
@@ -93,12 +94,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //For table 2
-    public boolean insertHabitDetailData (Integer KEY_NEWID,  String KEY_CHECKIN, String KEY_DONECOUNT){
+    public boolean insertHabitDetailData (Integer KEY_NEWID,  String KEY_SESSIONCOUNT, String KEY_DONECOUNT){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues con = new ContentValues();
         con.put("mainid", KEY_NEWID);
-        con.put("checkin", KEY_CHECKIN);
+        con.put("sessionCount", KEY_SESSIONCOUNT);
         con.put("doneCount", KEY_DONECOUNT);
 
 
@@ -154,6 +155,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    //Updating table 2
+    public boolean updateSession (String id, String sessionC){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("sessionCount", sessionC);
+        db.update(TABLE2,contentValues,"mainid=?", new String[]{id});
+        return true;
+
+    }
 
 
     public Cursor getHabitData (){

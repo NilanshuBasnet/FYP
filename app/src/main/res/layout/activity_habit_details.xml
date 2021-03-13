@@ -257,6 +257,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
+            <TextView
+                android:id="@+id/txtSessionCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/cambay_bold"
+                android:text="00:00"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
             <Button
                 android:id="@+id/btnSaveDetails"
                 android:layout_width="88dp"

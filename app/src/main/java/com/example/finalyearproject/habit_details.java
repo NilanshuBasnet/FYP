@@ -15,9 +15,9 @@ import android.widget.Toast;
 public class habit_details extends AppCompatActivity {
 
     Button btnBack;
-    TextView titleText, countCounter, completionRate, counterName, sessionStat, checkIns;
+    TextView titleText, countCounter, completionRate, counterName, sessionStat, checkIns, sessionCount;
     String id,title, totalCount,countName, trackingStatus, habitId,habitStat;
-    String stat = "OFF", checkin, counter;
+    String stat = "OFF", checkin, counter, sessionCounts;
     public String CounterCount;
     ProgressBar completionTracker;
     Button btnIncrease, btnDecrease, btnDelete, btnSessionTracking, btnSaveD;
@@ -45,6 +45,7 @@ public class habit_details extends AppCompatActivity {
         titleText = findViewById(R.id.txtSessionTrack);
         countCounter = findViewById(R.id.textViewCount);
         counterName = findViewById(R.id.textViewCountName);
+        sessionCount = findViewById(R.id.txtSessionCount);
         completionRate = findViewById(R.id.textViewCompletionRate);
         checkIns = findViewById(R.id.textViewCheckins);
         sessionStat = findViewById(R.id.txtSessionStat);
@@ -74,7 +75,7 @@ public class habit_details extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.deletePreviousData(id);
-                Boolean insertHabitDetail = db.insertHabitDetailData(Integer.valueOf(id),checkin,CounterCount);
+                Boolean insertHabitDetail = db.insertHabitDetailData(Integer.valueOf(id), String.valueOf(sessionCount.getText()),CounterCount);
                 onBackPressed();
                 Toast.makeText(habit_details.this, "Data Saved", Toast.LENGTH_SHORT).show();
             }
@@ -164,6 +165,7 @@ public class habit_details extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent session = new Intent(habit_details.this, session_tracking.class); //Calling new Activity
+                session.putExtra("id",id);
                 startActivity(session);
             }
         });
@@ -208,6 +210,7 @@ public class habit_details extends AppCompatActivity {
             String temp = "Off";
             sessionStat.setText(temp);
             btnSessionTracking.setVisibility(View.GONE);
+            sessionCount.setVisibility(View.GONE);
         }else{
             String temp = "On";
             sessionStat.setText(temp);
@@ -236,9 +239,11 @@ public class habit_details extends AppCompatActivity {
     public void searchData(){
         Cursor result = db.getHabitDetail(habitId);
         while (result.moveToNext()){
+            sessionCount.setText(result.getString(2));
             countCounter.setText(result.getString(3));
         }
 
     }
+
 
 }
