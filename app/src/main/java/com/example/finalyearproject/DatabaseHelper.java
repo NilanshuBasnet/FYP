@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Habit Data";
     private static final String TABLE_NAME = "Habits";
     private static final String TABLE2= "Habit_details";
-    
+
 
     //Columns for database table
     private static final String KEY_ID = "id";

@@ -3,7 +3,10 @@ package com.example.finalyearproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -42,6 +45,8 @@ public class session_tracking extends AppCompatActivity {
         id = getIntent().getStringExtra("id");
 
         sessioncount = findViewById(R.id.txtSessionCount);
+
+
 
         //Save session
         btnSaveSession = findViewById(R.id.btnSaveData);
