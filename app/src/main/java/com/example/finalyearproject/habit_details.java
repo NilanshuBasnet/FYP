@@ -37,7 +37,7 @@ public class habit_details extends AppCompatActivity {
     DatabaseHelper db;
     Dialog dialog;
     CalendarView calendarView;
-    String dateFormat, statData, sessionData,noteData ;
+    String dateFormat, statData, checkinData,noteData ;
 
     @Override
     public void onBackPressed()
@@ -83,6 +83,13 @@ public class habit_details extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         getIntentData();
+
+        Cursor reslt = db.countCheckin(habitId);
+        while (reslt.moveToNext()){
+            checkinData= reslt.getString(0);
+
+        }
+        checkIns.setText(String.valueOf(checkinData));
 
 
         CounterCount = countCounter.getText().toString();

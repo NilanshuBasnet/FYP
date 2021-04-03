@@ -264,6 +264,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //Calculating number of data for table 3 certain habit
+    public Cursor countCheckin (String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT COUNT(*) FROM " + TABLE3 + " WHERE habitId =" + id;
+        Cursor cal = null;
+        if(db != null){
+            cal = db.rawQuery(query,null);
+        }
+        return cal;
+    }
+
 
 
 
