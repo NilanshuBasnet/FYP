@@ -235,6 +235,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
     //For table 3
     public Cursor getCalendarHabitDetail (String id, String curDate){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -247,12 +248,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Deleting previous habit details data for table 3
-    public boolean CalDeletePreviousData (String KEY_ID){
+    public boolean CalDeletePreviousData (String KEY_ID, String date){
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cr = db.rawQuery("SELECT * FROM " + TABLE3 + " WHERE habitId = ?", new String[]{KEY_ID});
         if (cr.getCount() > 0) {
-            long result = db.delete(TABLE3,"habitId=?", new String[]{KEY_ID});
+            long result = db.delete(TABLE3,"habitId=? AND date=?", new String[]{KEY_ID,date});
             //if data is not inserted correctly it will return -1
             if (result == -1) {
                 return false;
@@ -263,6 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
 
     //Calculating number of data for table 3 certain habit
     public Cursor countCheckin (String id){

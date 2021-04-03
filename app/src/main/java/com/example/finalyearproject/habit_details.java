@@ -153,7 +153,7 @@ public class habit_details extends AppCompatActivity {
                 }
 
                 db.deletePreviousData(id);
-                db.CalDeletePreviousData(id);
+                db.CalDeletePreviousData(id,dateFormat);
                 Boolean insertHabitDetail = db.insertHabitDetailData(Integer.valueOf(id), String.valueOf(sessionCount.getText()),CounterCount);
                 Boolean CalInsertHabitDetail = db.insertCalendarHabitDetail(Integer.valueOf(id),dateFormat, Status, Note);
                 goToMain();
