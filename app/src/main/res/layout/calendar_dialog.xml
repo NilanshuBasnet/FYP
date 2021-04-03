@@ -31,10 +31,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+                app:layout_constraintTop_toBottomOf="@+id/txtNoteAns" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/txtNoteAns"
                 android:layout_width="322dp"
                 android:layout_height="122dp"
                 android:layout_marginTop="20dp"

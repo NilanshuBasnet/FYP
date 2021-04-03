@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context){
-        super(context,DATABASE_NAME,null,5);
+        super(context,DATABASE_NAME,null,6);
     }
 
     @Override
@@ -137,10 +137,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[]{KEY_ID});
         Cursor cr = db.rawQuery("SELECT * FROM " + TABLE2 + " WHERE mainid = ?", new String[]{KEY_ID});
+        Cursor cd = db.rawQuery("SELECT * FROM " + TABLE3 + " WHERE habitId = ?", new String[]{KEY_ID});
         if (cursor.getCount() > 0) {
             long result = db.delete(TABLE_NAME, "id=?", new String[]{KEY_ID});
             if(cr.getCount() > 0){
                 db.delete(TABLE2,"mainid=?", new String[]{KEY_ID});
+            }
+
+            if(cd.getCount() > 0){
+                db.delete(TABLE3,"habitId=?", new String[]{KEY_ID});
             }
 
             //if data is not inserted correctly it will return -1
@@ -233,9 +238,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //For table 3
-    public Cursor getCalendarHabitDetail (String id){
+    public Cursor getCalendarHabitDetail (String id, String curDate){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE3 + " WHERE mainid =" + id;
+        String query = "SELECT * FROM " + TABLE3 + " WHERE habitId =" + id + " AND date =" + curDate;
         Cursor cal = null;
         if(db != null){
             cal = db.rawQuery(query,null);

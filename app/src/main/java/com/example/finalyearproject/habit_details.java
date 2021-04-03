@@ -27,7 +27,7 @@ public class habit_details extends AppCompatActivity {
     Button btnBack;
     int totalCountInt, doneCountInt;
     TextView titleText, countCounter, completionRate, counterName, sessionStat, checkIns, sessionCount;
-    String id,title, totalCount,countName, trackingStatus, habitId,habitStat;
+    String id,title, totalCount,countName, trackingStatus, habitId,habitStat, temp;
     String stat = "OFF", checkin, counter, date;
     String Status = "Not Achieved";
     String Note = "No Note";
@@ -37,7 +37,7 @@ public class habit_details extends AppCompatActivity {
     DatabaseHelper db;
     Dialog dialog;
     CalendarView calendarView;
-    String dateFormat;
+    String dateFormat, statData, sessionData,noteData ;
 
     @Override
     public void onBackPressed()
@@ -67,6 +67,7 @@ public class habit_details extends AppCompatActivity {
         checkIns = findViewById(R.id.textViewCheckins);
         sessionStat = findViewById(R.id.txtSessionStat);
         completionTracker = findViewById(R.id.progressBar2);
+
 
 
         calendarView = findViewById(R.id.calendarView);
@@ -119,12 +120,26 @@ public class habit_details extends AppCompatActivity {
                 }
                 
                 date = dayOfMonth + " "+ monthName + " " + year;
+
+
+                int monthCorrection = month + 1;
+                temp = dayOfMonth + String.valueOf(monthCorrection) + year ;
+
+                Cursor result = db.getCalendarHabitDetail(habitId, String.valueOf(temp));
+                while (result.moveToNext()){
+                    statData= result.getString(3);
+                    sessionData = result.getString(4);
+                    noteData = result.getString(5);
+                }
+
+                Toast.makeText(habit_details.this, temp, Toast.LENGTH_SHORT).show();
                 openDialog();
 
 
             }
         });
 
+        dateFormat = new SimpleDateFormat("dMyyyy", Locale.getDefault()).format(new Date());
 
         //Save Details
         btnSaveD.setOnClickListener(new View.OnClickListener() {
@@ -133,11 +148,11 @@ public class habit_details extends AppCompatActivity {
                 if(totalCountInt == doneCountInt){
                     Status = "Achieved";
                 }
-                dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+
                 db.deletePreviousData(id);
                 db.CalDeletePreviousData(id);
                 Boolean insertHabitDetail = db.insertHabitDetailData(Integer.valueOf(id), String.valueOf(sessionCount.getText()),CounterCount);
-                Boolean CalInsertHabitDetail = db.insertCalendarHabitDetail(Integer.valueOf(id), String.valueOf(sessionCount.getText()), dateFormat, Status, Note);
+                Boolean CalInsertHabitDetail = db.insertCalendarHabitDetail(Integer.valueOf(id), String.valueOf(sessionCount.getText()),dateFormat, Status, Note);
                 goToMain();
                 Toast.makeText(habit_details.this, "Data Saved", Toast.LENGTH_SHORT).show();
             }
@@ -157,6 +172,7 @@ public class habit_details extends AppCompatActivity {
                 goToMain();
             }
         });
+
 
 
 
@@ -309,13 +325,23 @@ public class habit_details extends AppCompatActivity {
     }
 
 
+
+
     //Dialog for Calendar View
     private void openDialog(){
         dialog.setContentView(R.layout.calendar_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView title = dialog.findViewById(R.id.txtDate);
+        TextView statusAns = dialog.findViewById(R.id.txtStatusAnswer);
+        TextView sessionAns = dialog.findViewById(R.id.txtSessionAnswer);
+        TextView noteAns = dialog.findViewById(R.id.txtNoteAns);
         title.setText(date);
+        statusAns.setText(String.valueOf(statData));
+        sessionAns.setText(String.valueOf(sessionData));
+        noteAns.setText(String.valueOf(noteAns));
+
+
 
         Button btnSaveNote = dialog.findViewById(R.id.btnNoteSave);
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
