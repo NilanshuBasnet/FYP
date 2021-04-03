@@ -16,13 +16,17 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class session_tracking extends AppCompatActivity {
 
     private Chronometer chronometer;
     private long pauseOffset;
     Button btnBack, btnSaveSession;
     private boolean running;
-    String sessionTime, id;
+    String sessionTime, id,date;
     TextView sessioncount;
     DatabaseHelper db;
 

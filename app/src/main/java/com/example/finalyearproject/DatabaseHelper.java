@@ -36,7 +36,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Table3 Columns
     public static final String KEY_CALDATAID = "dataId";
     public static final String KEY_CALHABID = "habitId";
-    public static final String KEY_CALSESSION = "session";
     public static final String KEY_CALDATE = "date";
     public static final String KEY_CALSTAT = "staus";
     public static final String KEY_CALNOTE = "note";
@@ -45,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context){
-        super(context,DATABASE_NAME,null,6);
+        super(context,DATABASE_NAME,null,7);
     }
 
     @Override
@@ -70,7 +69,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_CALHABID +" INTEGER, "+
                 KEY_CALDATE +" TEXT," +
                 KEY_CALSTAT +" TEXT," +
-                KEY_CALSESSION +" TEXT," +
                 KEY_CALNOTE + " TEXT" + ")"
         );
 
@@ -190,6 +188,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     public Cursor getHabitData (){
 
         String query = "SELECT * FROM " + TABLE_NAME+" ORDER BY "+KEY_ID+" DESC";
@@ -213,14 +213,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     //For table 3
-    public boolean insertCalendarHabitDetail (Integer KEY_CALHABID,  String KEY_CALSESSION, String KEY_CALDATE, String KEY_CALSTAT, String KEY_CALNOTE){
+    public boolean insertCalendarHabitDetail (Integer KEY_CALHABID, String KEY_CALDATE, String KEY_CALSTAT, String KEY_CALNOTE){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues con = new ContentValues();
         con.put("habitId", KEY_CALHABID);
-        con.put("session", KEY_CALSESSION);
         con.put("date", KEY_CALDATE);
         con.put("staus", KEY_CALSTAT);
         con.put("note", KEY_CALNOTE);

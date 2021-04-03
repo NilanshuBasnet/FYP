@@ -37,7 +37,7 @@
                 android:id="@+id/txtNoteAns"
                 android:layout_width="322dp"
                 android:layout_height="122dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/border"
                 android:ems="10"
                 android:fontFamily="@font/cambay"
@@ -48,19 +48,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSessionAnswer" />
-
-            <TextView
-                android:id="@+id/txtSession"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/cambay_bold"
-                android:text="Session :"
-                android:textAllCaps="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtStatus" />
+                app:layout_constraintTop_toBottomOf="@+id/txtStatusAnswer" />
 
             <TextView
                 android:id="@+id/txtStatusAnswer"
@@ -73,19 +61,6 @@
                 android:textAllCaps="true"
                 app:layout_constraintStart_toEndOf="@+id/txtStatus"
                 app:layout_constraintTop_toBottomOf="@+id/txtDate" />
-
-            <TextView
-                android:id="@+id/txtSessionAnswer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/cambay"
-                android:text="00:00"
-                android:textAllCaps="true"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/txtSession"
-                app:layout_constraintTop_toBottomOf="@+id/txtStatusAnswer" />
 
             <TextView
                 android:id="@+id/txtDate"

@@ -121,18 +121,14 @@ public class habit_details extends AppCompatActivity {
                 
                 date = dayOfMonth + " "+ monthName + " " + year;
 
+                statData = "No Data";
+                noteData="Empty";
+
 
                 int monthCorrection = month + 1;
                 temp = dayOfMonth + String.valueOf(monthCorrection) + year ;
+                searchCalData();
 
-                Cursor result = db.getCalendarHabitDetail(habitId, String.valueOf(temp));
-                while (result.moveToNext()){
-                    statData= result.getString(3);
-                    sessionData = result.getString(4);
-                    noteData = result.getString(5);
-                }
-
-                Toast.makeText(habit_details.this, temp, Toast.LENGTH_SHORT).show();
                 openDialog();
 
 
@@ -152,7 +148,7 @@ public class habit_details extends AppCompatActivity {
                 db.deletePreviousData(id);
                 db.CalDeletePreviousData(id);
                 Boolean insertHabitDetail = db.insertHabitDetailData(Integer.valueOf(id), String.valueOf(sessionCount.getText()),CounterCount);
-                Boolean CalInsertHabitDetail = db.insertCalendarHabitDetail(Integer.valueOf(id), String.valueOf(sessionCount.getText()),dateFormat, Status, Note);
+                Boolean CalInsertHabitDetail = db.insertCalendarHabitDetail(Integer.valueOf(id),dateFormat, Status, Note);
                 goToMain();
                 Toast.makeText(habit_details.this, "Data Saved", Toast.LENGTH_SHORT).show();
             }
@@ -324,6 +320,16 @@ public class habit_details extends AppCompatActivity {
 
     }
 
+    //Getting Data of table 3
+    public void searchCalData(){
+        Cursor result = db.getCalendarHabitDetail(habitId,temp);
+        while (result.moveToNext()){
+            statData= result.getString(3);
+            noteData = result.getString(4);
+        }
+
+    }
+
 
 
 
@@ -334,12 +340,10 @@ public class habit_details extends AppCompatActivity {
 
         TextView title = dialog.findViewById(R.id.txtDate);
         TextView statusAns = dialog.findViewById(R.id.txtStatusAnswer);
-        TextView sessionAns = dialog.findViewById(R.id.txtSessionAnswer);
         TextView noteAns = dialog.findViewById(R.id.txtNoteAns);
         title.setText(date);
         statusAns.setText(String.valueOf(statData));
-        sessionAns.setText(String.valueOf(sessionData));
-        noteAns.setText(String.valueOf(noteAns));
+        noteAns.setText(String.valueOf(noteData));
 
 
 
