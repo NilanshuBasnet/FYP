@@ -358,6 +358,10 @@ public class habit_details extends AppCompatActivity {
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Note = noteAns.getText().toString();
+                Boolean updateNote = db.updateNotes(habitId,Note,temp);
+
                 dialog.dismiss();
             }
         });

@@ -278,6 +278,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Updating table 3
+    public boolean updateNotes (String id, String notes, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("note", notes);
+        db.update(TABLE3,contentValues,"habitId=? AND date=?", new String[]{id,date});
+        return true;
+
+    }
+
+
 
 
 }
