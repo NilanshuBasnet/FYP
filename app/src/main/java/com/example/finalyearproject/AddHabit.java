@@ -2,10 +2,13 @@ package com.example.finalyearproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.NotificationCompat;
 
 import android.app.AlarmManager;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -44,6 +47,8 @@ public class AddHabit extends AppCompatActivity {
     String time = "Not Set";
     DatabaseHelper dbase;
 
+    private NotificationHelper mNotificationHelper;
+
     @Override
     public void onBackPressed()
     {
@@ -56,6 +61,8 @@ public class AddHabit extends AppCompatActivity {
         setContentView(R.layout.activity_add_habit);
 
         dbase = new DatabaseHelper(this);
+
+        mNotificationHelper = new NotificationHelper(this);
 
 
 
@@ -98,10 +105,16 @@ public class AddHabit extends AppCompatActivity {
                             Calendar c = Calendar.getInstance();
                             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             c.set(Calendar.MINUTE, minute);
+                            c.set(Calendar.SECOND, 0);
                             c.setTimeZone(TimeZone.getDefault());
-                            SimpleDateFormat format = new SimpleDateFormat("k:mm a"); //k-Hour in day (1-24) m-Minute in hour a-Am/pm marker
+                            SimpleDateFormat format = new SimpleDateFormat("hh:mm a"); //h- hour of day m-Minute in hour a-Am/pm marker
                             time = format.format(c.getTime());
                             txtNotify.setText("Set for " + time);
+                            startAlarm(c);
+
+
+
+
                         }
                     }, hour, min, false);
                     timePickerDialog.show();
@@ -176,19 +189,37 @@ public class AddHabit extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),  "Please fill all the required fields! ", Toast.LENGTH_SHORT).show();
 
                 } else {
+
                     Boolean insertData = dbase.insertHabitData(shabitName,sgoalCount,scountName,sessions,newTime);
                     goToMain();
+
                     Toast.makeText(getApplicationContext(),  "Habit Added ", Toast.LENGTH_SHORT).show();
+
+
                 }
 
             }
         });
     }
 
+
     private void goToMain() {
         Intent i = new Intent(this,Dashboard.class);
         startActivity(i);
         finish();
+    }
+
+    private void startAlarm(Calendar c){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent,0);
+
+        //Fire alarm next day, if todays time already passed
+        if (c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE,1);
+        }
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
 
