@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context){
-        super(context,DATABASE_NAME,null,7);
+        super(context,DATABASE_NAME,null,9);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         db.execSQL("CREATE TABLE " + TABLE3 + " (" +  KEY_CALDATAID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                KEY_CALHABID +" INTEGER, "+
+                KEY_CALHABID +" INTEGER,"+
                 KEY_CALDATE +" TEXT," +
                 KEY_CALSTAT +" TEXT," +
                 KEY_CALNOTE + " TEXT" + ")"

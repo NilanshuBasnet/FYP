@@ -42,7 +42,7 @@ public class AddHabit extends AppCompatActivity {
     Switch session;
     Switch Notify;
     int Nhour,Nminute;
-    String shabitName, sgoalCount, scountName, newTime;
+    String shabitName, sgoalCount, scountName, newTime, goalCountVal;
     String sessions = "0";
     String time = "Not Set";
     DatabaseHelper dbase;
@@ -157,6 +157,8 @@ public class AddHabit extends AppCompatActivity {
 
                 habitName = findViewById(R.id.UserInputHabitName);
                 goalCount = findViewById(R.id.userInputGoal);
+                goalCountVal= goalCount.getText().toString();
+                int tempGoal = Integer.parseInt(goalCountVal);
                 countName = findViewById(R.id.userInputCount);
 
                 shabitName = habitName.getText().toString();
@@ -190,11 +192,15 @@ public class AddHabit extends AppCompatActivity {
 
                 } else {
 
-                    Boolean insertData = dbase.insertHabitData(shabitName,sgoalCount,scountName,sessions,newTime);
-                    goToMain();
 
-                    Toast.makeText(getApplicationContext(),  "Habit Added ", Toast.LENGTH_SHORT).show();
+                    if(tempGoal == 0){
+                        Toast.makeText(getApplicationContext(), "Invalid Goal Count", Toast.LENGTH_SHORT).show();
+                    } else {
 
+                        Boolean insertData = dbase.insertHabitData(shabitName, sgoalCount, scountName, sessions, newTime);
+                        goToMain();
+                        Toast.makeText(getApplicationContext(), "Habit Added ", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
